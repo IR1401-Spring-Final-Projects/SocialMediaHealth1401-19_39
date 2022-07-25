@@ -7,24 +7,37 @@
     <title>Document</title>
   </head>
   <body>
-    <nav>
-      <form method="post">
-        <input type="submit" name="search-tab" value="Search" />
-        <input type="submit" name="classify-tab" value="Classify" />
-        <input type="submit" name="link-analysis-tab" value="Link Analysis" />
-        {% csrf_token %}
-      </form>
-    </nav>
+    <script id="replace_with_navbar" src="nav.js"></script>
 
     <form method="post">
       <input type="checkbox" name="subject-toggle" id="subject-toggle" />
       <input type="text" name="search-term" value="" />
-      <input type="checkbox" name="subject-toggle" id="query-expansion-toggle" />
-      <input type="submit" value="Boolean Search" name="boolean-search-button" />
+      <input
+        type="checkbox"
+        name="subject-toggle"
+        id="query-expansion-toggle"
+      />
+      <input
+        type="submit"
+        value="Boolean Search"
+        name="boolean-search-button"
+      />
       <input type="submit" value="TF-IDF Search" name="tfidf-search-button" />
-      <input type="submit" value="Transformer Search" name="transformer-search-button" />
-      <input type="submit" value="FastText Search" name="fasttext-search-button" />
-      <input type="submit" value="Elastic Search" name="elastic-search-button" />
+      <input
+        type="submit"
+        value="Transformer Search"
+        name="transformer-search-button"
+      />
+      <input
+        type="submit"
+        value="FastText Search"
+        name="fasttext-search-button"
+      />
+      <input
+        type="submit"
+        value="Elastic Search"
+        name="elastic-search-button"
+      />
       {% csrf_token %}
     </form>
   </body>
