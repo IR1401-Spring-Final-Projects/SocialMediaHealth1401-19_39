@@ -41,3 +41,9 @@ transformer_retrieval.train(training.df)
 
 def retrieve(query):
     return transformer_retrieval.retrieve(query)
+
+
+try:
+    print(retrieve(Query("pandemic")))
+except Exception as e:
+    print(e)

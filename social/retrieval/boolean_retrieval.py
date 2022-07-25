@@ -45,3 +45,9 @@ boolean_retrieval_system.train(training.df)
 
 def retrieve(query):
     return boolean_retrieval_system.retrieve(query)
+
+
+try:
+    print(retrieve(Query("hair")))
+except Exception as e:
+    print(e)

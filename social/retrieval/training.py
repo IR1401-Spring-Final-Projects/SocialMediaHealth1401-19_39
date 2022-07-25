@@ -55,7 +55,7 @@ def remove_stop_words(tokens: list) -> list:
 
 def normalize(tokens):
     """
-    Normalizes the tokens of the lyrics.
+    Normalizes the tokens of the text.
     """
     normalization_functions = [to_lower, remove_punctuation, remove_stop_words]
     return functools.reduce(lambda x, f: f(x), normalization_functions, tokens)

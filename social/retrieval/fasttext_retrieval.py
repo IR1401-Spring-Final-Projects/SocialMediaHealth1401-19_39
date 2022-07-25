@@ -39,3 +39,9 @@ fasttext_retrieval.train(training.df)
 
 def retrieve(query):
     return fasttext_retrieval.retrieve(query)
+
+
+try:
+    print(retrieve(Query("pandemic")))
+except Exception as e:
+    print(e)

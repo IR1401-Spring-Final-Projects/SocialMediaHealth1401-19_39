@@ -26,3 +26,9 @@ tfidf_retrieval_system.train(training.df)
 
 def retrieve(query):
     return tfidf_retrieval_system.retrieve(query)
+
+
+try:
+    print(retrieve(Query("pandemic")))
+except Exception as e:
+    print(e)
