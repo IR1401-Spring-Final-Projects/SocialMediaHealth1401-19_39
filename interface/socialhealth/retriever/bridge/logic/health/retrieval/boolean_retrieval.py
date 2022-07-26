@@ -1,5 +1,7 @@
 from .requires import *
 
+num_of_words = []
+
 
 def splitInput(input):
     splitted_input = input.split(" ")
@@ -10,15 +12,14 @@ def splitInput(input):
     return nsi
 
 
-def boolean_retrieval(query, k=10):
+def boolean_retrieval():
     """
-    :param query: a string of words
     :param corpus: a list of documents
     :return: a list of documents that match the query
     """
-    print("training boolean_retrieval retrieval system for health")
+    global num_of_words
 
-    nsi = splitInput(query)
+    num_of_words = []
 
     bag_of_words = []
     unique_words = set()
@@ -29,18 +30,19 @@ def boolean_retrieval(query, k=10):
         bag_of_words.append(bag_of_word)
         unique_words = set(unique_words).union(set(bag_of_word))
 
-    num_of_words = []
-
     for i in range(len(bag_of_words)):
         numOfWord = dict.fromkeys(unique_words, 0)
         for word in bag_of_words[i]:
             numOfWord[word] += 1
         num_of_words.append(numOfWord)
 
+
+def boolean_query(query, k=10):
     score = {}
     for i in range(len(all_tokens_nonstop_lemstem)):
         score[i] = 0
 
+    nsi = splitInput(query)
     counter = 0
     for doc in num_of_words:
         for word in nsi:
@@ -60,8 +62,8 @@ def boolean_retrieval(query, k=10):
     for x in sorted_score:
         if counter >= k:
             break
-        temp = {'title': bioset[x]['title'], 'link': bioset[x]['link']}
-
+        # temp = {'title': bioset[x]['title'], 'link': bioset[x]['link']}
+        temp = '' + bioset[x]['title'] + '\n' + bioset[x]['link']
 
         # print(bioset[x]['title'])
         # print(bioset[x]['link'])
@@ -69,9 +71,14 @@ def boolean_retrieval(query, k=10):
 
         counter += 1
         res.append(temp)
-        print("training boolean_retrieval retrieval system for health done")
+
     return res
 
 
+print("training boolean_retrieval retrieval system for health")
+boolean_retrieval()
+print("training boolean_retrieval retrieval system for health done")
+
+
 def retrieve(search_term):
-    return boolean_retrieval(search_term)
+    return boolean_query(search_term)
