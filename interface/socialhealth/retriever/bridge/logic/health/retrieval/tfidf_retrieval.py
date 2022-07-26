@@ -20,7 +20,7 @@ def find_query_vector(tokens):
         try:
             index = vectorizer.vocabulary_[token]
             vector[index] = 1
-        except ValueError:
+        except:
             pass
     return vector
 
@@ -31,15 +31,16 @@ def search(query, k):
     query_vector = find_query_vector(tokens)
 
     for doc in doc_term_mat.A:
-        scores.append(np.dot(query_vector, doc) / (np.linalg.norm(query_vector) * np.linalg.norm(doc)))
+        scores.append(np.dot(query_vector, doc) /
+                      (np.linalg.norm(query_vector) * np.linalg.norm(doc)))
     return np.array(scores).argsort()[-k:][::-1]
 
 
 def main(query):
     print("training tfidf retrieval system for health")
 
-    x = search(query, k=10)
-    result = []
+    x = search(query, k=50)
+    result = set()
     for index in x:
         # temp = {'title': bioset[index]['title'], 'link': bioset[index]['link']}
         temp = '' + bioset[index]['title'] + '\n' + bioset[index]['link']
@@ -47,11 +48,11 @@ def main(query):
         # print(bioset[index]['title'])
         # print(bioset[index]['link'])
         # print()
-        result.append(temp)
+        result.add(temp)
 
     print("training tfidf retrieval system for health done")
 
-    return result
+    return list(result)
 
 
 def retrieve(search_term):
