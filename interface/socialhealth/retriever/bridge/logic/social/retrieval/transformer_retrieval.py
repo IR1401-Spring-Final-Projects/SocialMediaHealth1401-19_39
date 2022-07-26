@@ -20,6 +20,7 @@ class TransformerRetrieval(RetrievalSystemBase):
             context_encoder_name=context_encoder_name,
             query_encoder_name=question_encoder_name,
             args=args,
+            use_cuda=False,
         )
         self.train_df = df[['text', 'text_preprocessed']].copy(deep=True)
         self.train_df.rename(columns={'text': 'query_text', 'text_preprocessed': 'gold_passage'}, inplace=True)
@@ -36,7 +37,7 @@ class TransformerRetrieval(RetrievalSystemBase):
 
 print("training transformer retrieval system")
 transformer_retrieval = TransformerRetrieval()
-# transformer_retrieval.train(df)
+#transformer_retrieval.train(df)
 print("training transformer retrieval system done")
 
 

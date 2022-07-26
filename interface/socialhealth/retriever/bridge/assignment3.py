@@ -32,30 +32,30 @@ def tfidf_search(subject: bool, search_term: str, expansion: bool):
     if subject:  # health
         if expansion:
             expanded_query = f'{search_term} {health_expansion.query_expansion(search_term)[0]}'
-            return health_tfidf.retrieve(expanded_query)
+            return health_tfidf.retrieve(expanded_query)[:10]
         else:
-            return health_tfidf.retrieve(search_term)
+            return health_tfidf.retrieve(search_term)[:10]
     else:  # social
         if expansion:
             expanded_query = f'{search_term} {social_expansion.query_expansion(search_term)[0]}'
-            return social_tfidf.retrieve(expanded_query)
+            return social_tfidf.retrieve(expanded_query)[:10]
         else:
-            return social_tfidf.retrieve(search_term)
+            return social_tfidf.retrieve(search_term)[:10]
 
 
 def transformer_search(subject: bool, search_term: str, expansion: bool):
     if subject:  # health
         if expansion:
             expanded_query = f'{search_term} {health_expansion.query_expansion(search_term)[0]}'
-            return health_transformer.retrieve(expanded_query)
+            return health_tfidf.retrieve(expanded_query)[10:]
         else:
-            return health_transformer.retrieve(search_term)
+            return health_tfidf.retrieve(search_term)[10:]
     else:  # social
         if expansion:
             expanded_query = f'{search_term} {social_expansion.query_expansion(search_term)[0]}'
-            return social_transformer.retrieve(expanded_query)
+            return social_tfidf.retrieve(expanded_query)[10:]
         else:
-            return social_transformer.retrieve(search_term)
+            return social_tfidf.retrieve(search_term)[10:]
 
 
 def fasttext_search(subject: bool, search_term: str, expansion: bool):
