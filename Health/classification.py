@@ -9,7 +9,7 @@ import json
 from sklearn.feature_extraction.text import TfidfVectorizer
 
 
-vectorizer = TfidfVectorizer(use_idf = True, norm ='l2', ngram_range=(1,1))
+vectorizer = TfidfVectorizer(use_idf=True, norm='l2', ngram_range=(1, 1))
 doc_term_mat = vectorizer.fit_transform([' '.join(doc) for doc in all_tokens_nonstop_lemstem])
 vocabulary = vectorizer.get_feature_names_out()
 
@@ -20,8 +20,6 @@ f.close()
 
 def classification():
     true_labels = true_labels_func()
-    
-
 
 
 def true_labels_func():
@@ -43,7 +41,8 @@ def true_labels_func():
 
 def regression_model(true_labels):
     TEST_SIZE = 0.2
-    X_train, X_test, y_train, y_test = sk.model_selection.train_test_split(doc_term_mat, true_labels, test_size=TEST_SIZE)
+    X_train, X_test, y_train, y_test = sk.model_selection.train_test_split(doc_term_mat, true_labels,
+                                                                           test_size=TEST_SIZE)
     logistic_regression = sk.linear_model.LogisticRegression()
     logistic_regression.fit(X_train, y_train)
 
@@ -55,4 +54,3 @@ def regression_model(true_labels):
     print("f1 score: ", f1_score(y_test, y_pred, average="macro"))
     print("precision score: ", precision_score(y_test, y_pred, average="macro"))
     print("recall score: ", recall_score(y_test, y_pred, average="macro"))
-
