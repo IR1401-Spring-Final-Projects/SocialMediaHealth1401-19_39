@@ -1,4 +1,4 @@
-from Health.requires import *
+from .requires import *
 # import faiss
 import numpy as np
 import torch

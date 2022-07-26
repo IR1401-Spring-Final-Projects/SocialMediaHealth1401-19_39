@@ -2,7 +2,7 @@ import numpy as np
 import sklearn as sk
 from sklearn.metrics import f1_score, accuracy_score, confusion_matrix, precision_score, recall_score
 
-from Health.requires import *
+from .requires import *
 
 
 def classification():

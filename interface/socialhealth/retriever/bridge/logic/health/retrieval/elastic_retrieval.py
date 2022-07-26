@@ -3,7 +3,7 @@ from elasticsearch import helpers
 from abc import ABC, abstractmethod
 import pandas as pd
 import json
-from Health.requires import *
+from .requires import *
 
 
 class Query:

@@ -2,7 +2,7 @@ import codecs
 import itertools
 import numpy as np
 
-from Health.requires import *
+from .requires import *
 
 
 def process_query(query):

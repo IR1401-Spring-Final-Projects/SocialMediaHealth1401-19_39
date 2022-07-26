@@ -1,6 +1,6 @@
 import numpy as np
 import fasttext.util
-from Health.requires import *
+from .requires import *
 
 
 def fasttext(search):
