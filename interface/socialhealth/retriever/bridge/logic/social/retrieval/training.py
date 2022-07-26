@@ -67,11 +67,11 @@ def normalize(tokens):
 df['text_normalized'] = df['text_tokenized'].apply(normalize)
 
 # Stem Text
-stemmer = nltk.stem.SnowballStemmer('english')
-df['text_stemmed'] = df['text_normalized'].apply(lambda x: [stemmer.stem(t) for t in x])
+# stemmer = nltk.stem.SnowballStemmer('english')
+# df['text_stemmed'] = df['text_normalized'].apply(lambda x: [stemmer.stem(t) for t in x])
 
 # Join Text
-df['text_preprocessed'] = df['text_stemmed'].apply(lambda x: ' '.join(x))
+df['text_preprocessed'] = df['text_normalized'].apply(lambda x: ' '.join(x))
 
 pd.set_option('display.max_columns', None)
 # print(df.head())
