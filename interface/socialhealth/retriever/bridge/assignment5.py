@@ -1,2 +1,5 @@
 def link_analysis(subject: str):
-    pass
+    if subject: # health
+        pass
+    else: # social
+        pass

@@ -1,2 +1,5 @@
 def classify_cluster(subject: bool, search_term: str):
-    pass
+    if subject: # health
+        pass
+    else: # social
+        pass
