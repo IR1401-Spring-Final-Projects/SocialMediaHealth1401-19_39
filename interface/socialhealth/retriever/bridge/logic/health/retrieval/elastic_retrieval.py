@@ -3,7 +3,6 @@ from elasticsearch import helpers
 from abc import ABC, abstractmethod
 import pandas as pd
 import json
-from .requires import *
 
 
 class Query:
@@ -71,3 +70,6 @@ def main(search_term):
 
 def retrieve(search_term):
     return main(search_term)
+
+
+# retrieve('نپش قلب')
