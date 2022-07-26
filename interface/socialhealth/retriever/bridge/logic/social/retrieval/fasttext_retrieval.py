@@ -1,8 +1,7 @@
 import numpy as np
 import pandas as pd
 from gensim.models import FastText
-from training import Query, RetrievalSystemBase
-import training
+from retriever.bridge.logic.social.retrieval.training import Query, RetrievalSystemBase, df
 
 
 class FastTextRetrieval(RetrievalSystemBase):
@@ -34,7 +33,7 @@ class FastTextRetrieval(RetrievalSystemBase):
 
 
 fasttext_retrieval = FastTextRetrieval()
-fasttext_retrieval.train(training.df)
+fasttext_retrieval.train(df)
 
 
 def retrieve(query):

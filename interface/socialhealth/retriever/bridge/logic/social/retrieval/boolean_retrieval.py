@@ -1,8 +1,7 @@
 import pandas as pd
 import functools
 import numpy as np
-from .training import Query, RetrievalSystemBase, df
-from query import Query
+from retriever.bridge.logic.social.retrieval.training import Query, RetrievalSystemBase, df
 
 
 class BooleanRetrieval(RetrievalSystemBase):
@@ -40,8 +39,10 @@ class BooleanRetrieval(RetrievalSystemBase):
 
 
 boolean_retrieval_system = BooleanRetrieval()
-boolean_retrieval_system.train(training.df)
+boolean_retrieval_system.train(df)
 
 
 def retrieve(query):
     return boolean_retrieval_system.retrieve(Query(query))
+
+print(retrieve("sick"))

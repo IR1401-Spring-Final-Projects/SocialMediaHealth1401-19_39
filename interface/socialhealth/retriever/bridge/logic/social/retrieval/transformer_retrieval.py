@@ -1,7 +1,6 @@
 import pandas as pd
 from simpletransformers.retrieval import RetrievalModel
-from training import Query, RetrievalSystemBase
-import training
+from retriever.bridge.logic.social.retrieval.training import Query, RetrievalSystemBase, df
 
 
 class TransformerRetrieval(RetrievalSystemBase):
@@ -36,7 +35,7 @@ class TransformerRetrieval(RetrievalSystemBase):
 
 
 transformer_retrieval = TransformerRetrieval()
-transformer_retrieval.train(training.df)
+transformer_retrieval.train(df)
 
 
 def retrieve(query):
