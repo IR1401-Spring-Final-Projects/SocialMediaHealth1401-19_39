@@ -43,7 +43,7 @@ class ElasticsearchRetrieval(RetrievalSystemBase):
         pass
 
     def retrieve(self, query: Query) -> list:
-        results = self.es.search(index=self.index, query={'multi_match': {'query': query.text, 'fields': []}}, size=10000)
+        results = self.es.search(index=self.index, query={'multi_match': {'query': query.text, 'fields': []}}, size=10)
         return [result['_source'] for result in results['hits']['hits']]
 
 try:

@@ -19,12 +19,21 @@
         <form class="form-inline" method="post">
           <div class="btn-pill col-auto mb-3">
             <input
-              class="btn btn-primary"
+              class="btn btn-danger"
               type="submit"
               value="Link Analysis"
               name="link-analysis-button"
             />
           </div>
+          <label class="checkbox-inline col-auto mb-3">
+            <input
+              type="checkbox"
+              name="subject-toggle"
+              id="subject-toggle"
+              data-toggle="toggle"
+            />
+            Health
+          </label>
           {% csrf_token %}
         </form>
       </div>

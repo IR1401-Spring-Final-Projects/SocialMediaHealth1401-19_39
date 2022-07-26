@@ -17,7 +17,7 @@
     <div class="container-fluid">
       <div class="jumbotron" style="margin-top: 20px">
         <form lass="form-inline" method="post">
-          <div class="input-group form-group mb-3 col-auto">
+          <div class="input-group form-group  mb-3 col-auto ">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-lg"
                 >Query</span
@@ -32,14 +32,23 @@
             aria-describedby="inputGroup-sizing-lg"
             placeholder="Enter your query"/>
           </div>
-          <div class="btn-pill col-auto mb-3">
+          <div class="justify-content-between btn-pill  mb-3 col-auto ">
             <input
-              class="btn btn-primary"
+              class="btn btn-danger"
               type="submit"
               value="Classification/Clustering"
               name="classify-cluster-button"
             />
           </div>
+          <label class="justify-content-between checkbox-inline  mb-3 col-auto ">
+            <input
+              type="checkbox"
+              name="subject-toggle"
+              id="subject-toggle"
+              data-toggle="toggle"
+            />
+            Health
+          </label>
           {% csrf_token %}
         </form>
       </div>
