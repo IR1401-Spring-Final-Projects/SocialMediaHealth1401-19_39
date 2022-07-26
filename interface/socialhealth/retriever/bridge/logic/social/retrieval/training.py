@@ -4,6 +4,7 @@ import string
 import functools
 from abc import ABC, abstractmethod
 
+print("preprocessing data")
 nltk.download('punkt')
 nltk.download('stopwords')
 
@@ -74,6 +75,7 @@ df['text_preprocessed'] = df['text_stemmed'].apply(lambda x: ' '.join(x))
 
 pd.set_option('display.max_columns', None)
 # print(df.head())
+print("preprocessing data done")
 
 
 class Query:
