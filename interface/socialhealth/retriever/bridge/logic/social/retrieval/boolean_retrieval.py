@@ -1,8 +1,7 @@
 import pandas as pd
 import functools
 import numpy as np
-from training import Query, RetrievalSystemBase
-import training
+from .training import Query, RetrievalSystemBase, df
 from query import Query
 
 

@@ -9,6 +9,8 @@ nltk.download('stopwords')
 
 # Load Data
 PATH_TO_SENTIMENT140_DATASET = 'short-social-dataset.csv'
+import os
+print(os.getcwd())
 CSV_COLUMNS = ['target', 'id', 'date', 'flag', 'user', 'text']
 TEST_SIZE = 0.2
 
@@ -17,7 +19,7 @@ df.columns = CSV_COLUMNS
 df.drop(columns=['target', 'id', 'date', 'flag', 'user'], inplace=True)
 
 # Sample Data
-df = df.sample(n=10000)
+# df = df.sample(n=10000)
 
 # Tokenize Data
 df['text_tokenized'] = df['text'].apply(lambda x: nltk.word_tokenize(x))
