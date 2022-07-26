@@ -17,7 +17,6 @@
     <div class="container-fluid">
       <div class="jumbotron" style="margin-top: 20px">
         <script id="replace_with_navbar" src="nav.js"></script>
-
         <form class="form-inline" method="post">
           <div class="input-group form-group mb-3 col-auto">
             <div class="input-group-prepend">
@@ -35,7 +34,7 @@
               placeholder="Enter your query"
             />
           </div>
-          <div class="btn-pill col-auto  mb-3">
+          <div class="btn-pill col-auto mb-3">
             <input
               class="btn btn-primary"
               type="submit"
@@ -85,7 +84,13 @@
             />
             Health
           </label>
+          {% csrf_token %}
         </form>
+        <ul>
+          {% for d in data %}
+          <li>{{ d }}</li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
   </body>
