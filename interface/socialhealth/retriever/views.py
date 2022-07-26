@@ -77,36 +77,30 @@ def classify(request):
 
 
 def link_analysis(request):
-    context = {
-        "data": []
-    }
     if request.method == 'POST':
         nav = navbar(request)
         if nav:
             return nav
         subject = True if request.POST.get(SUBJECT_TOGGLE_KEY, None) == 'on' else False
         if LINK_ANALYSIS_BUTTON_KEY in request.POST:
-            context["data"] = link_analysis(subject)
-    return render(request, 'retriever/link-analysis.html', context)
+            if subject:
+                return redirect('retriever-link-analysis-health')
+            else:
+                return redirect('retriever-link-analysis-social')
+    return render(request, 'retriever/link-analysis.html')
 
     
-def link_analysis_img(request):
-    context = {
-        "data": []
-    }
+def link_analysis_social(request):
     if request.method == 'POST':
         nav = navbar(request)
         if nav:
             return nav
-    return render(request, 'retriever/link-analysis-img.html', context)
+    return render(request, 'retriever/link-analysis-social.html')
 
 
 def link_analysis_health(request):
-    context = {
-        "data": []
-    }
     if request.method == 'POST':
         nav = navbar(request)
         if nav:
             return nav
-    return render(request, 'retriever/link-analysis-health.html', context)
+    return render(request, 'retriever/link-analysis-health.html')
