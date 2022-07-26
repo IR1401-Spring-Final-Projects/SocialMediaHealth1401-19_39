@@ -31,6 +31,7 @@ try:
 except Exception as e:
     print(e)
 
+
 def retrieve(query):
     return ElasticsearchRetrieval.retrieve(Query(query))
     
