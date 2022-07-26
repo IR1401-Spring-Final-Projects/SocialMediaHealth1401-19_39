@@ -1,6 +1,5 @@
 import pandas as pd
 from retriever.bridge.logic.social.retrieval.training import Query, RetrievalSystemBase, df
-from query import Query
 from elasticsearch import Elasticsearch
 from elasticsearch import helpers
 import pandas as pd
@@ -8,10 +7,9 @@ import json
 
 class ElasticsearchRetrieval(RetrievalSystemBase):
     def __init__(self):
-        config = json.load(open('config.json'))
-        address = config['elastic_address']
+        address = "http://192.168.100.43:9200"
         self.es = Elasticsearch(address)
-        self.index = config['elastic_index']
+        self.index = "social"
         if not self.es.ping():
             print(self.es.info())
             raise Exception('Could not connect to Elasticsearch')
@@ -27,8 +25,11 @@ class ElasticsearchRetrieval(RetrievalSystemBase):
         results = self.es.search(index=self.index, query={'match': {'text': query.text}})
         return [result['_source'] for result in results['hits']['hits']]
 
-elastic_retrieval = ElasticsearchRetrieval()
-elastic_retrieval.train(df)
+try:
+    elastic_retrieval = ElasticsearchRetrieval()
+    # elastic_retrieval.train(df)
+except Exception as e:
+    print(e)
 
 def retrieve(query):
     return ElasticsearchRetrieval.retrieve(Query(query))

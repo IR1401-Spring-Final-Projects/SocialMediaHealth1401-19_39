@@ -34,9 +34,11 @@ class TransformerRetrieval(RetrievalSystemBase):
         return predicted_passages[0]
 
 
+print("training transformer retrieval system")
 transformer_retrieval = TransformerRetrieval()
-transformer_retrieval.train(df)
+# transformer_retrieval.train(df)
+print("training transformer retrieval system done")
 
 
 def retrieve(query):
-    return transformer_retrieval.retrieve(query)
+    return transformer_retrieval.retrieve(Query(query))

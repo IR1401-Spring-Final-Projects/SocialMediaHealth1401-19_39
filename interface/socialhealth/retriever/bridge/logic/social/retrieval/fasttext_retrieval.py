@@ -32,9 +32,11 @@ class FastTextRetrieval(RetrievalSystemBase):
         return [self.document_text_by_idx[i] for i in similarities]
 
 
+print("training fasttext retrieval system")
 fasttext_retrieval = FastTextRetrieval()
-fasttext_retrieval.train(df)
+# fasttext_retrieval.train(df)
+print("training fasttext retrieval system done")
 
 
 def retrieve(query):
-    return fasttext_retrieval.retrieve(query)
+    return fasttext_retrieval.retrieve(Query(query))
