@@ -46,7 +46,10 @@ class ElasticsearchRetrieval(RetrievalSystemBase):
         results = self.es.search(index=self.index, query={'multi_match': {'query': query.text, 'fields': []}}, size=10000)
         return [result['_source'] for result in results['hits']['hits']]
 
-esr = ElasticsearchRetrieval()
+try:
+    esr = ElasticsearchRetrieval()
+except:
+    print("Could not connect to Elasticsearch")
 
 def retrieve(search_term):
     results = esr.retrieve(Query(search_term))

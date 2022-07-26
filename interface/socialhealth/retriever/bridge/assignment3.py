@@ -17,72 +17,72 @@ def boolean_search(subject: bool, search_term: str, expansion: bool):
     if subject:  # health
         if expansion:
             expanded_query = f'{search_term} {health_expansion.query_expansion(search_term)[0]}'
-            health_boolean.retrieve(expanded_query)
+            return health_boolean.retrieve(expanded_query)
         else:
-            health_boolean.retrieve(search_term)
+            return health_boolean.retrieve(search_term)
     else:  # social
         if expansion:
             expanded_query = f'{search_term} {social_expansion.query_expansion(search_term)[0]}'
-            social_boolean.retrieve(expanded_query)
+            return social_boolean.retrieve(expanded_query)
         else:
-            social_boolean.retrieve(search_term)
+            return social_boolean.retrieve(search_term)
 
 
 def tfidf_search(subject: bool, search_term: str, expansion: bool):
     if subject:  # health
         if expansion:
             expanded_query = f'{search_term} {health_expansion.query_expansion(search_term)[0]}'
-            health_tfidf.retrieve(expanded_query)
+            return health_tfidf.retrieve(expanded_query)
         else:
-            health_tfidf.retrieve(search_term)
+            return health_tfidf.retrieve(search_term)
     else:  # social
         if expansion:
             expanded_query = f'{search_term} {social_expansion.query_expansion(search_term)[0]}'
-            social_tfidf.retrieve(expanded_query)
+            return social_tfidf.retrieve(expanded_query)
         else:
-            social_tfidf.retrieve(search_term)
+            return social_tfidf.retrieve(search_term)
 
 
 def transformer_search(subject: bool, search_term: str, expansion: bool):
     if subject:  # health
         if expansion:
             expanded_query = f'{search_term} {health_expansion.query_expansion(search_term)[0]}'
-            health_transformer.retrieve(expanded_query)
+            return health_transformer.retrieve(expanded_query)
         else:
-            health_transformer.retrieve(search_term)
+            return health_transformer.retrieve(search_term)
     else:  # social
         if expansion:
             expanded_query = f'{search_term} {social_expansion.query_expansion(search_term)[0]}'
-            social_transformer.retrieve(expanded_query)
+            return social_transformer.retrieve(expanded_query)
         else:
-            social_transformer.retrieve(search_term)
+            return social_transformer.retrieve(search_term)
 
 
 def fasttext_search(subject: bool, search_term: str, expansion: bool):
     if subject:  # health
         if expansion:
             expanded_query = f'{search_term} {health_expansion.query_expansion(search_term)[0]}'
-            health_fasttext.retrieve(expanded_query)
+            return health_fasttext.retrieve(expanded_query)
         else:
-            health_fasttext.retrieve(search_term)
+            return health_fasttext.retrieve(search_term)
     else:  # social
         if expansion:
             expanded_query = f'{search_term} {social_expansion.query_expansion(search_term)[0]}'
-            social_fasttext.retrieve(expanded_query)
+            return social_fasttext.retrieve(expanded_query)
         else:
-            social_fasttext.retrieve(search_term)
+            return social_fasttext.retrieve(search_term)
 
 
 def elasticsearch_search(subject: bool, search_term: str, expansion: bool):
     if subject:  # health
         if expansion:
             expanded_query = f'{search_term} {health_expansion.query_expansion(search_term)[0]}'
-            health_elastic.retrieve(expanded_query)
+            return health_elastic.retrieve(expanded_query)
         else:
-            health_elastic.retrieve(search_term)
+            return health_elastic.retrieve(search_term)
     else:  # social
         if expansion:
             expanded_query = f'{search_term} {social_expansion.query_expansion(search_term)[0]}'
-            social_elastic.retrieve(expanded_query)
+            return social_elastic.retrieve(expanded_query)
         else:
-            social_elastic.retrieve(search_term)
+            return social_elastic.retrieve(search_term)

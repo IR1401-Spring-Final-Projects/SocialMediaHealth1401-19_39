@@ -41,14 +41,9 @@ class BooleanRetrieval(RetrievalSystemBase):
         return [self.idx_to_document[i] for i in np.where(self.document_word_matrix[:, idx] == 1)[0]]
 
 
-print("training boolean retrieval system")
 boolean_retrieval_system = BooleanRetrieval()
 boolean_retrieval_system.train(df)
-print("training boolean retrieval system done")
 
 def retrieve(query):
-    print(query)
     results = boolean_retrieval_system.retrieve(Query(query))
-    print(boolean_retrieval_system.retrieve(Query("happy")))
-    print(len(results))
     return results

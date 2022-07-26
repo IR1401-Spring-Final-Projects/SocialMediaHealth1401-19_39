@@ -46,7 +46,9 @@ def search(request):
         search_term = request.POST.get(SEARCH_TERM_KEY, None)
         expansion = True if request.POST.get(QUERY_EXPANSION_TOGGLE_KEY, None) == 'on' else False
         if BOOLEAN_SEARCH_BUTTON_KEY in request.POST:
-            context["data"] = boolean_search(subject, search_term, expansion)
+            results = boolean_search(subject, search_term, expansion)
+            print(len(results))
+            context["data"] = results
         elif TFIDF_SEARCH_BUTTON_KEY in request.POST:
             context["data"] = tfidf_search(subject, search_term, expansion)
         elif TRANSFORMER_SEARCH_BUTTON_KEY in request.POST:
