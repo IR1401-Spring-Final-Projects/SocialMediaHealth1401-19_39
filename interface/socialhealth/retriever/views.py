@@ -36,15 +36,15 @@ def navbar(request):
 
 def search(request):
     context = {
-        "data": []
+        "data": ['result is shown here ...']
     }
     if request.method == 'POST':
         nav = navbar(request)
         if nav:
             return nav
-        subject =  request.POST.get(SUBJECT_TOGGLE_KEY, None)
+        subject = True if request.POST.get(SUBJECT_TOGGLE_KEY, None) == 'on' else False
         search_term = request.POST.get(SEARCH_TERM_KEY, None)
-        expansion = request.POST.get(QUERY_EXPANSION_TOGGLE_KEY, None)
+        expansion = True if request.POST.get(QUERY_EXPANSION_TOGGLE_KEY, None) == 'on' else False
         if BOOLEAN_SEARCH_BUTTON_KEY in request.POST:
             context["data"] = boolean_search(subject, search_term, expansion)
         elif TFIDF_SEARCH_BUTTON_KEY in request.POST:
@@ -55,7 +55,7 @@ def search(request):
             context["data"] = fasttext_search(subject, search_term, expansion)
         elif ELASTICSEARCH_SEARCH_BUTTON_KEY in request.POST:
             context["data"] = elasticsearch_search(subject, search_term, expansion)
-    return render(request, 'retriever/search.html')
+    return render(request, 'retriever/search.html', context)
 
 
 def classify(request):
@@ -67,11 +67,11 @@ def classify(request):
         nav = navbar(request)
         if nav:
             return nav
-        subject =  request.POST.get(SUBJECT_TOGGLE_KEY, None)
+        subject = True if request.POST.get(SUBJECT_TOGGLE_KEY, None) == 'on' else False
         classify_term = request.POST.get(CLASSIFY_TERM_KEY, None)
         if CLASSIFY_CLUSTER_BUTTON_KEY in request.POST:
             context["class"], context["cluster"] = classify_cluster(subject, classify_term)
-    return render(request, 'retriever/classify.html')
+    return render(request, 'retriever/classify.html', context)
 
 
 def link_analysis(request):
@@ -82,7 +82,7 @@ def link_analysis(request):
         nav = navbar(request)
         if nav:
             return nav
-        subject =  request.POST.get(SUBJECT_TOGGLE_KEY, None)
+        subject = True if request.POST.get(SUBJECT_TOGGLE_KEY, None) == 'on' else False
         if LINK_ANALYSIS_BUTTON_KEY in request.POST:
             context["data"] = link_analysis(subject)
-    return render(request, 'retriever/link-analysis.html')
+    return render(request, 'retriever/link-analysis.html', context)
