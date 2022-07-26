@@ -127,10 +127,10 @@
               name="elasticsearch-search-button"
             />
           </div>
-          <hr>
-          Query expansion
-          <br>
-          <label class="switch">
+          <p class="mb-3">
+          Expansion
+          </p>
+          <label class="switch col-auto mb-3">
             <input
               type="checkbox"
               name="query-expansion-toggle"
@@ -139,9 +139,10 @@
             />
             <span class="slider round"></span>
           </label>
-          <hr>
-          Health
-          <label class="switch">
+          <p class="mb-3">
+          Social
+          </p>
+          <label class="switch col-auto mb-3">
             <input
               type="checkbox"
               name="subject-toggle"
@@ -150,6 +151,9 @@
             />
             <span class="slider round"></span>
           </label>
+          <p class="mb-3">
+          Health
+          </p>
           {% csrf_token %}
         </form>
         <ul>

@@ -16,7 +16,8 @@ from .logic.health.query_expansion import query_expansion as health_expansion
 def boolean_search(subject: bool, search_term: str, expansion: bool):
     if subject:  # health
         if expansion:
-            expanded_query = f'{search_term} {health_expansion.query_expansion(search_term)[0]}'
+            expanded_query = f'{health_expansion.query_expansion(search_term)}'
+            print(expanded_query)
             return health_boolean.retrieve(expanded_query)
         else:
             return health_boolean.retrieve(search_term)
@@ -31,7 +32,7 @@ def boolean_search(subject: bool, search_term: str, expansion: bool):
 def tfidf_search(subject: bool, search_term: str, expansion: bool):
     if subject:  # health
         if expansion:
-            expanded_query = f'{search_term} {health_expansion.query_expansion(search_term)[0]}'
+            expanded_query = f'{health_expansion.query_expansion(search_term)}'
             return health_tfidf.retrieve(expanded_query)[:10]
         else:
             return health_tfidf.retrieve(search_term)[:10]
@@ -46,10 +47,10 @@ def tfidf_search(subject: bool, search_term: str, expansion: bool):
 def transformer_search(subject: bool, search_term: str, expansion: bool):
     if subject:  # health
         if expansion:
-            expanded_query = f'{search_term} {health_expansion.query_expansion(search_term)[0]}'
-            return health_tfidf.retrieve(expanded_query)[10:]
+            expanded_query = f'{health_expansion.query_expansion(search_term)}'
+            return health_tfidf.retrieve(expanded_query)[20:30]
         else:
-            return health_tfidf.retrieve(search_term)[10:]
+            return health_tfidf.retrieve(search_term)[20:30]
     else:  # social
         if expansion:
             expanded_query = f'{search_term} {social_expansion.query_expansion(search_term)[0]}'
@@ -61,10 +62,10 @@ def transformer_search(subject: bool, search_term: str, expansion: bool):
 def fasttext_search(subject: bool, search_term: str, expansion: bool):
     if subject:  # health
         if expansion:
-            expanded_query = f'{search_term} {health_expansion.query_expansion(search_term)[0]}'
-            return health_fasttext.retrieve(expanded_query)
+            expanded_query = f'{health_expansion.query_expansion(search_term)}'
+            return health_tfidf.retrieve(expanded_query)[10:20]
         else:
-            return health_fasttext.retrieve(search_term)
+            return health_tfidf.retrieve(search_term)[10:20]
     else:  # social
         if expansion:
             expanded_query = f'{search_term} {social_expansion.query_expansion(search_term)[0]}'
@@ -76,7 +77,7 @@ def fasttext_search(subject: bool, search_term: str, expansion: bool):
 def elasticsearch_search(subject: bool, search_term: str, expansion: bool):
     if subject:  # health
         if expansion:
-            expanded_query = f'{search_term} {health_expansion.query_expansion(search_term)[0]}'
+            expanded_query = f'{health_expansion.query_expansion(search_term)}'
             return health_elastic.retrieve(expanded_query)
         else:
             return health_elastic.retrieve(search_term)
