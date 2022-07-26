@@ -44,18 +44,21 @@ class ElasticsearchRetrieval(RetrievalSystemBase):
     def train(self, df: pd.DataFrame):
         documents = []
         for index, row in df.iterrows():
-            documents.append({'_index': self.index, '_title': row['title'], '_source': row.to_dict()})
+            documents.append(
+                {'_index': self.index, '_title': row['title'], '_source': row.to_dict()})
         helpers.bulk(self.es, documents)
         self.es.indices.refresh(index=self.index)
 
     def retrieve(self, query: Query) -> list:
-        results = self.es.search(index=self.index, query={'match': {'text': query.text}})
+        results = self.es.search(index=self.index, query={
+                                 'match': {'text': query.text}})
         return [result['_source'] for result in results['hits']['hits']]
 
 
 def main(search_term):
     # Example usage
-    CSV_COLUMNS = ['tags', 'categories', 'title', 'abstract', 'paragraphs', 'link']
+    CSV_COLUMNS = ['tags', 'categories', 'title',
+                   'abstract', 'paragraphs', 'link']
     df = pd.read_json('bio.json')
     df.to_csv()
     df.columns = CSV_COLUMNS
