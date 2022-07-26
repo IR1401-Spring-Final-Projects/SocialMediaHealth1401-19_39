@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search</title>
+  </head>
+  <body>
+    {% include 'retriever/nav.html' %}
+    <div class="container-fluid">
+      <div class="jumbotron" style="margin-top: 20px">
+        <script id="replace_with_navbar" src="nav.js"></script>
+
+        <form class="form-inline" method="post">
+          <div class="input-group form-group mb-3 col-auto">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-lg"
+                >Query</span
+              >
+            </div>
+            <input
+              type="text"
+              name="search-term"
+              value=""
+              class="form-control"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-lg"
+              placeholder="Enter your query"
+            />
+          </div>
+          <div class="btn-pill col-auto  mb-3">
+            <input
+              class="btn btn-primary"
+              type="submit"
+              value="Boolean Search"
+              name="boolean-search-button"
+            />
+            <input
+              class="btn btn-info"
+              type="submit"
+              value="TF-IDF Search"
+              name="tfidf-search-button"
+            />
+            <input
+              class="btn btn-secondary"
+              type="submit"
+              value="Transformer Search"
+              name="transformer-search-button"
+            />
+            <input
+              class="btn btn-dark"
+              type="submit"
+              value="FastText Search"
+              name="fasttext-search-button"
+            />
+            <input
+              class="btn btn-danger"
+              type="submit"
+              value="Elastic Search"
+              name="elastic-search-button"
+            />
+          </div>
+          <label class="checkbox-inline col-auto mb-3">
+            <input
+              type="checkbox"
+              name="subject-toggle"
+              id="query-expansion-toggle"
+              data-toggle="toggle"
+            />
+            Query expansion
+          </label>
+          <label class="checkbox-inline col-auto mb-3">
+            <input
+              type="checkbox"
+              name="subject-toggle"
+              id="subject-toggle"
+              data-toggle="toggle"
+            />
+            Health
+          </label>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
