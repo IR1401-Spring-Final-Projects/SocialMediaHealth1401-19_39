@@ -57,8 +57,8 @@ def main():
     print(len(df.index))
     df.columns = CSV_COLUMNS
     esr = ElasticsearchRetrieval()
-    esr.train(df)
-    print((esr.retrieve(Query('birthday'))))
+    # esr.train(df)
+    print((esr.retrieve(Query('birthday'))[0]['text']))
 
 
 if __name__ == '__main__':
