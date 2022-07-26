@@ -52,7 +52,6 @@ def query(distance_list, k=10):
     res = []
     for i in range(k):
         # temp = {'title': bioset[x]['title'], 'link': bioset[x]['link']}
-        # temp = '' + bioset[i]['title'] + '\n' + bioset[i]['link']
         temp = '' + bioset[i]['title'] + '\n' + bioset[i]['link']
 
         # print(bioset[doc_indices[i]]['title'])
@@ -62,6 +61,10 @@ def query(distance_list, k=10):
         res.append(temp)
     return res
 
+
+print("training fasttext retrieval system for health")
+fasttext()
+print("training fasttext retrieval system for health done")
 
 def retrieve(search_term):
     return fasttext(search_term)

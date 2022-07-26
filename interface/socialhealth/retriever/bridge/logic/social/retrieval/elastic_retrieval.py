@@ -26,6 +26,7 @@ try:
 except Exception as e:
     print(e)
 
+
 def retrieve(query):
     results = elastic_retrieval.retrieve(Query(query))
     return [r['text'] for r in results]

@@ -8,6 +8,7 @@ import json
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pickle
 import pandas as pd
+import dill
 
 documents_length = 875
 
@@ -35,6 +36,9 @@ bioset = None
 f = open('bio.json')
 bioset = json.load(f)
 f.close()
+titles_links = []
+for i in bioset:
+    titles_links.append(str(i['title']) + '\n' + str(i['link']))
 # print(bioset[0])
 
 
@@ -67,3 +71,4 @@ print(esr.retrieve(Query('نپش قلب')))
 
 
 # print(df[0:10])
+
