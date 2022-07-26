@@ -1,6 +1,5 @@
 import pandas as pd
-from training import Query, RetrievalSystemBase
-import training
+from retriever.bridge.logic.social.retrieval.training import Query, RetrievalSystemBase, df
 from query import Query
 from elasticsearch import Elasticsearch
 from elasticsearch import helpers
@@ -29,7 +28,7 @@ class ElasticsearchRetrieval(RetrievalSystemBase):
         return [result['_source'] for result in results['hits']['hits']]
 
 elastic_retrieval = ElasticsearchRetrieval()
-elastic_retrieval.train(training.df)
+elastic_retrieval.train(df)
 
 def retrieve(query):
     return ElasticsearchRetrieval.retrieve(Query(query))

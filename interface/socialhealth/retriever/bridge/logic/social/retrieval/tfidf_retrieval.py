@@ -1,7 +1,6 @@
 import sklearn as sk
 import pandas as pd
-from training import Query, RetrievalSystemBase
-import training
+from retriever.bridge.logic.social.retrieval.training import Query, RetrievalSystemBase, df
 
 
 class TfIdfRetrieval(RetrievalSystemBase):
@@ -17,11 +16,11 @@ class TfIdfRetrieval(RetrievalSystemBase):
         query_vector = self.tfidf_vectorizer.transform([query.text])
         similarities = (query_vector * self.tfidf_matrix.T).toarray().flatten()
         similarities = similarities.argsort()[-self.k:][::-1]
-        return [training.df['text'].iloc[i] for i in similarities]
+        return [df['text'].iloc[i] for i in similarities]
 
 
 tfidf_retrieval_system = TfIdfRetrieval()
-tfidf_retrieval_system.train(training.df)
+tfidf_retrieval_system.train(df)
 
 
 def retrieve(query):
