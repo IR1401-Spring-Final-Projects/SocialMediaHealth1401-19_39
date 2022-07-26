@@ -34,7 +34,7 @@ class FastTextRetrieval(RetrievalSystemBase):
 
 print("training fasttext retrieval system")
 fasttext_retrieval = FastTextRetrieval()
-# fasttext_retrieval.train(df)
+fasttext_retrieval.train(df)
 print("training fasttext retrieval system done")
 
 

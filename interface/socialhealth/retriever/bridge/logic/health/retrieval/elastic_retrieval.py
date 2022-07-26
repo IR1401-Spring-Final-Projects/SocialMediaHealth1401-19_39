@@ -3,7 +3,6 @@ from elasticsearch import helpers
 from abc import ABC, abstractmethod
 import pandas as pd
 import json
-from .requires import *
 
 
 class Query:
@@ -33,41 +32,25 @@ class RetrievalSystemBase(ABC):
 
 class ElasticsearchRetrieval(RetrievalSystemBase):
     def __init__(self):
-        config = json.load(open('config.json'))
-        address = config['elastic_address']
+        address = "http://192.168.100.43:9200"
         self.es = Elasticsearch(address)
-        self.index = config['elastic_index']
+        self.index = "health_final"
         if not self.es.ping():
             print(self.es.info())
             raise Exception('Could not connect to Elasticsearch')
 
     def train(self, df: pd.DataFrame):
-        documents = []
-        for index, row in df.iterrows():
-            documents.append(
-                {'_index': self.index, '_title': row['title'], '_source': row.to_dict()})
-        helpers.bulk(self.es, documents)
-        self.es.indices.refresh(index=self.index)
+        pass
 
     def retrieve(self, query: Query) -> list:
-        results = self.es.search(index=self.index, query={
-                                 'match': {'text': query.text}})
+        results = self.es.search(index=self.index, query={'multi_match': {'query': query.text, 'fields': []}}, size=10000)
         return [result['_source'] for result in results['hits']['hits']]
 
-
-def main(search_term):
-    # Example usage
-    CSV_COLUMNS = ['tags', 'categories', 'title',
-                   'abstract', 'paragraphs', 'link']
-    df = pd.read_json('bio.json')
-    df.to_csv()
-    df.columns = CSV_COLUMNS
+try:
     esr = ElasticsearchRetrieval()
-    esr.train(df)
-    answer = esr.retrieve(Query(search_term))
-    print(answer)
-    return answer
-
+except:
+    print("Could not connect to Elasticsearch")
 
 def retrieve(search_term):
-    return main(search_term)
+    results = esr.retrieve(Query(search_term))
+    return [f"{r['title']}:{r['link']}" for r in results]

@@ -31,20 +31,20 @@ class BooleanRetrieval(RetrievalSystemBase):
         union = functools.reduce(lambda x, y: x.union(y), documents)
         signle = union - intersection
         length = self.k if len(intersection) > self.k else len(intersection)
-        return list(intersection)[:length] + list(signle)[:self.k-length]
+        return list(intersection)[:length] + list(signle)[:self.k - length]
 
     def __retrieve_word(self, word: str) -> list:
-        try: 
+        try:
             idx = self.word_to_idx[word]
         except KeyError:
             return []
         return [self.idx_to_document[i] for i in np.where(self.document_word_matrix[:, idx] == 1)[0]]
 
 
-print("training boolean retrieval system")
 boolean_retrieval_system = BooleanRetrieval()
 boolean_retrieval_system.train(df)
-print("training boolean retrieval system done")
+
 
 def retrieve(query):
-    return boolean_retrieval_system.retrieve(Query(query))
+    results = boolean_retrieval_system.retrieve(Query(query))
+    return results

@@ -40,24 +40,25 @@ class ElasticsearchRetrieval(RetrievalSystemBase):
 
     def train(self, df: pd.DataFrame):
         documents = []
-        for index, row in df.iterrows():
-            documents.append({'_index': self.index, '_id': row['id'], '_source': row.to_dict()})
+        for _, row in df.iterrows():
+            documents.append({'_index': self.index, '_source': row.to_dict()})
         helpers.bulk(self.es, documents)
         self.es.indices.refresh(index=self.index)
 
     def retrieve(self, query: Query) -> list:
-        results = self.es.search(index=self.index, query={'match': {'text': query.text}})
+        results = self.es.search(index=self.index, query={'multi_match': {'query': query.text, 'fields': []}}, size=10000)
         return [result['_source'] for result in results['hits']['hits']]
 
 
 def main():
     # Example usage
     CSV_COLUMNS = ['target', 'id', 'date', 'flag', 'user', 'text']
-    df = pd.read_csv("sample.csv")
+    df = pd.read_csv("../interface/socialhealth/short-social-dataset.csv")
+    print(len(df.index))
     df.columns = CSV_COLUMNS
     esr = ElasticsearchRetrieval()
-    esr.train(df)
-    print(esr.retrieve(Query('happy')))
+    # esr.train(df)
+    print((esr.retrieve(Query('birthday'))[0]['text']))
 
 
 if __name__ == '__main__':
