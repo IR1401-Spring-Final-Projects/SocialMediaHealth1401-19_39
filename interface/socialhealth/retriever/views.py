@@ -86,3 +86,25 @@ def link_analysis(request):
         if LINK_ANALYSIS_BUTTON_KEY in request.POST:
             context["data"] = link_analysis(subject)
     return render(request, 'retriever/link-analysis.html', context)
+
+    
+def link_analysis_img(request):
+    context = {
+        "data": []
+    }
+    if request.method == 'POST':
+        nav = navbar(request)
+        if nav:
+            return nav
+    return render(request, 'retriever/link-analysis-img.html', context)
+
+
+def link_analysis_health(request):
+    context = {
+        "data": []
+    }
+    if request.method == 'POST':
+        nav = navbar(request)
+        if nav:
+            return nav
+    return render(request, 'retriever/link-analysis-health.html', context)
