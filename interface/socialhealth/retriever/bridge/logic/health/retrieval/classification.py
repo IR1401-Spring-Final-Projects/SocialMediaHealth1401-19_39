@@ -6,8 +6,9 @@ from .requires import *
 
 
 def classification():
-
+    print("training classification retrieval system for health")
     true_labels = true_labels_func()
+    print("training classification retrieval system for health done")
 
 
 def true_labels_func():

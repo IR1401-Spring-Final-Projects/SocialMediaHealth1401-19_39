@@ -4,6 +4,8 @@ from .requires import *
 
 
 def fasttext(search):
+    print("training fasttext retrieval system for health")
+
     ft = fasttext.load_model('cc.fa.300.bin')
     search_words_splited = search.split(" ")
     vectors = []
@@ -32,7 +34,9 @@ def fasttext(search):
         distances_list.append(
             np.dot(search_vector, doc_vector) / (np.linalg.norm(search_vector) * np.linalg.norm(doc_vector)))
 
-    query(distances_list, 10)
+    print("training fasttext retrieval system for health done")
+
+    return query(distances_list, 10)
 
 
 def query(distance_list, k=10):
@@ -45,10 +49,18 @@ def query(distance_list, k=10):
         doc_indices.append(distance_list.index(sorted_dist_list[i]))
 
     # print(doc_indices)
+    res = []
     for i in range(k):
-        print(bioset[doc_indices[i]]['title'])
-        print(bioset[doc_indices[i]]['link'])
-        print()
+        # temp = {'title': bioset[x]['title'], 'link': bioset[x]['link']}
+        # temp = '' + bioset[i]['title'] + '\n' + bioset[i]['link']
+        temp = '' + bioset[i]['title'] + '\n' + bioset[i]['link']
+
+        # print(bioset[doc_indices[i]]['title'])
+        # print(bioset[doc_indices[i]]['link'])
+        # print()
+
+        res.append(temp)
+    return res
 
 
 def retrieve(search_term):

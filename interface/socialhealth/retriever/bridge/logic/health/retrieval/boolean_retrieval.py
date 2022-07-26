@@ -16,6 +16,7 @@ def boolean_retrieval(query, k=10):
     :param corpus: a list of documents
     :return: a list of documents that match the query
     """
+    print("training boolean_retrieval retrieval system for health")
 
     nsi = splitInput(query)
 
@@ -61,12 +62,14 @@ def boolean_retrieval(query, k=10):
             break
         temp = {'title': bioset[x]['title'], 'link': bioset[x]['link']}
 
+
         # print(bioset[x]['title'])
         # print(bioset[x]['link'])
         # print()
 
         counter += 1
         res.append(temp)
+        print("training boolean_retrieval retrieval system for health done")
     return res
 
 

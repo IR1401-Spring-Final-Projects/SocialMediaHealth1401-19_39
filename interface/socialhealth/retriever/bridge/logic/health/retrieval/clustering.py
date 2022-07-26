@@ -12,6 +12,7 @@ from .requires import *
 
 
 def cluster():
+    print("training cluster retrieval system for health")
     true_labels = true_labels_func()
 
     kmeans = KMeans(n_clusters=7, random_state=0).fit(doc_term_mat)
@@ -21,16 +22,19 @@ def cluster():
     TSNE_func(true_labels, predicted_labels)
 
     RSS = calculate_RSS(doc_term_mat, kmeans.cluster_centers_, kmeans.labels_)
-    print("RSS is {}".format(RSS))
+    # print("RSS is {}".format(RSS))
 
     silhouette_avg = silhouette_score(doc_term_mat, kmeans.labels_)
-    print("For n_clusters =", 7, "The average silhouette_score is :", silhouette_avg, )
+    # print("For n_clusters =", 7, "The average silhouette_score is :", silhouette_avg, )
 
     silhouette_visualizer(7)
     intercluster_distance_maps(7)
 
     score = purity_score(true_labels, predicted_labels)
-    print("purity score is {}".format(score))
+    # print("purity score is {}".format(score))
+
+    print("training cluster retrieval system for health done")
+
 
 
 def true_labels_func():
