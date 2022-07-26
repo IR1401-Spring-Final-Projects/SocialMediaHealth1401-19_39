@@ -48,13 +48,13 @@ def search(request):
         if BOOLEAN_SEARCH_BUTTON_KEY in request.POST:
             context["data"] = boolean_search(subject, search_term, expansion)
         elif TFIDF_SEARCH_BUTTON_KEY in request.POST:
-            acontext["data"] = tfidf_search(subject, search_term, expansion)
+            context["data"] = tfidf_search(subject, search_term, expansion)
         elif TRANSFORMER_SEARCH_BUTTON_KEY in request.POST:
-            acontext["data"] = transformer_search(subject, search_term, expansion)
+            context["data"] = transformer_search(subject, search_term, expansion)
         elif FASTTEXT_SEARCH_BUTTON_KEY in request.POST:
-            acontext["data"] = fasttext_search(subject, search_term, expansion)
+            context["data"] = fasttext_search(subject, search_term, expansion)
         elif ELASTICSEARCH_SEARCH_BUTTON_KEY in request.POST:
-            acontext["data"] = elasticsearch_search(subject, search_term, expansion)
+            context["data"] = elasticsearch_search(subject, search_term, expansion)
     return render(request, 'retriever/search.html')
 
 
