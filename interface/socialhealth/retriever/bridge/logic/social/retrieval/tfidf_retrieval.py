@@ -4,7 +4,7 @@ from retriever.bridge.logic.social.retrieval.training import Query, RetrievalSys
 
 
 class TfIdfRetrieval(RetrievalSystemBase):
-    def __init__(self, k=10):
+    def __init__(self, k=20):
         self.tfidf_vectorizer = sk.feature_extraction.text.TfidfVectorizer()
         self.tfidf_matrix = None
         self.k = k
