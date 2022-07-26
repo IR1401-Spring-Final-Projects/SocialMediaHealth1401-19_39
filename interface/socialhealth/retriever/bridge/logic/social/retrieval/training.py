@@ -8,7 +8,7 @@ nltk.download('punkt')
 nltk.download('stopwords')
 
 # Load Data
-PATH_TO_SENTIMENT140_DATASET = 'datasets/training.1600000.processed.noemoticon.csv'
+PATH_TO_SENTIMENT140_DATASET = 'short-social-dataset.csv'
 CSV_COLUMNS = ['target', 'id', 'date', 'flag', 'user', 'text']
 TEST_SIZE = 0.2
 
