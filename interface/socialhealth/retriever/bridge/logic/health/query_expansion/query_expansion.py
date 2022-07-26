@@ -1,14 +1,21 @@
+import codecs
 import pickle
 from hazm import *
+from hazm import Normalizer
+
+normalizer = Normalizer()
+stopwords = [normalizer.normalize(x.strip()) for x in codecs.open(
+    'stopwords.txt', 'r', 'utf-8').readlines()]
 
 
 def query_expansion(query):
     queryList = query.split()
     expand = ''
     for x in queryList:
+        if (x in stopwords):
+            continue
         input_query = x
-        pkl_file = open('SocialMediaHealth1401-19_39/interface/socialhealth/retriever/bridge/logic/health'
-                        '/query_expansion /data.pkl', 'rb')
+        pkl_file = open('data.pkl', 'rb')
         dic = pickle.load(pkl_file)
         pkl_file.close()
         normalizer = Normalizer()
@@ -22,10 +29,15 @@ def query_expansion(query):
                 tokens_synonyms = word_tokenize(dic[x])
                 for y in tokens_synonyms:
                     list_of_synonyms[x] = y
+
             except:
-                list_of_synonyms[x] = x
+                pass
+                # list_of_synonyms[x] = x
         values = list(list_of_synonyms.values())
-        expand += f'{values[0]} '
+        try:
+            expand += f'{values[0]} '
+        except:
+            expand += ''
     expand = expand.strip()
     print(expand)
     expandedQuery = f'{query} {expand}'
