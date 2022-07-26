@@ -19,9 +19,11 @@ class TfIdfRetrieval(RetrievalSystemBase):
         return [df['text'].iloc[i] for i in similarities]
 
 
+print("training tfidf retrieval system")
 tfidf_retrieval_system = TfIdfRetrieval()
 tfidf_retrieval_system.train(df)
+print("training tfidf retrieval system done")
 
 
 def retrieve(query):
-    return tfidf_retrieval_system.retrieve(query)
+    return tfidf_retrieval_system.retrieve(Query(query))
