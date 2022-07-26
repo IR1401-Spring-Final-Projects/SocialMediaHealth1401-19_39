@@ -47,4 +47,8 @@ boolean_retrieval_system.train(df)
 print("training boolean retrieval system done")
 
 def retrieve(query):
-    return boolean_retrieval_system.retrieve(Query(query))
+    print(query)
+    results = boolean_retrieval_system.retrieve(Query(query))
+    print(boolean_retrieval_system.retrieve(Query("happy")))
+    print(len(results))
+    return results

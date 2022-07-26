@@ -55,7 +55,7 @@ def search(request):
             context["data"] = fasttext_search(subject, search_term, expansion)
         elif ELASTICSEARCH_SEARCH_BUTTON_KEY in request.POST:
             context["data"] = elasticsearch_search(subject, search_term, expansion)
-    return render(request, 'retriever/search.html', context)
+    return render(request, 'retriever/search-sara.html', context)
 
 
 def classify(request):
