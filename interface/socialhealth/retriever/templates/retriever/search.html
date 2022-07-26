@@ -39,5 +39,12 @@
       />
       {% csrf_token %}
     </form>
+    <ul>
+      {% for d in data %}
+        <li>
+          {{ d }}
+        </li>
+      {% endfor %}
+    </ul>
   </body>
 </html>
