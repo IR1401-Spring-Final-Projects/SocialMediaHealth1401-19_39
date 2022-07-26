@@ -20,20 +20,17 @@ def query_expansion(query):
         pkl_file.close()
         normalizer = Normalizer()
         normalized = normalizer.normalize(input_query)
-        stemmer = Stemmer()
-        stemmed = stemmer.stem(normalized)
-        tokens = word_tokenize(stemmed)
         list_of_synonyms = {}
-        for x in tokens:
-            try:
-                tokens_synonyms = word_tokenize(dic[x])
-                for y in tokens_synonyms:
-                    list_of_synonyms[x] = y
-
-            except:
-                pass
-                # list_of_synonyms[x] = x
+        try:
+            tokens_synonyms = word_tokenize(dic[x])
+            listSyn = []
+            for y in tokens_synonyms:
+                listSyn.append(y)
+            list_of_synonyms[x] = listSyn
+        except:
+            pass
         values = list(list_of_synonyms.values())
+        values = values[0]
         try:
             expand += f'{values[0]} '
         except:
