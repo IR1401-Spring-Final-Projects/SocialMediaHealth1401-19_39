@@ -32,7 +32,7 @@ class RetrievalSystemBase(ABC):
 
 class ElasticsearchRetrieval(RetrievalSystemBase):
     def __init__(self):
-        address = "http://192.168.100.43:9200"
+        address = "http://localhost:9200"
         self.es = Elasticsearch(address)
         self.index = "health_final"
         if not self.es.ping():
@@ -43,13 +43,16 @@ class ElasticsearchRetrieval(RetrievalSystemBase):
         pass
 
     def retrieve(self, query: Query) -> list:
-        results = self.es.search(index=self.index, query={'multi_match': {'query': query.text, 'fields': []}}, size=10)
+        results = self.es.search(index=self.index, query={'multi_match': {
+                                 'query': query.text, 'fields': []}}, size=10)
         return [result['_source'] for result in results['hits']['hits']]
+
 
 try:
     esr = ElasticsearchRetrieval()
 except:
     print("Could not connect to Elasticsearch")
+
 
 def retrieve(search_term):
     results = esr.retrieve(Query(search_term))

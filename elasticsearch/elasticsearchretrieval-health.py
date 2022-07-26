@@ -4,10 +4,12 @@ from abc import ABC, abstractmethod
 import pandas as pd
 import json
 
+
 class Query:
     """
     A class that represents a query.
     """
+
     def __init__(self, text: str):
         self.text = text
 
@@ -46,7 +48,8 @@ class ElasticsearchRetrieval(RetrievalSystemBase):
         self.es.indices.refresh(index=self.index)
 
     def retrieve(self, query: Query) -> list:
-        results = self.es.search(index=self.index, query={'multi_match': {'query': query.text, 'fields': []}}, size=10000)
+        results = self.es.search(index=self.index, query={'multi_match': {
+                                 'query': query.text, 'fields': []}}, size=10000)
         return [result['_source'] for result in results['hits']['hits']]
 
 
@@ -54,7 +57,7 @@ def main():
     # Example usage
     CSV_COLUMNS = ['tags', 'categories', 'title',
                    'abstract', 'paragraphs', 'link']
-    df = pd.read_json('../interface/socialhealth/retriever/bridge/logic/health/retrieval/bio.json')
+    df = pd.read_json('../interface/socialhealth/bio.json')
     df.to_csv()
     df.columns = CSV_COLUMNS
     esr = ElasticsearchRetrieval()
