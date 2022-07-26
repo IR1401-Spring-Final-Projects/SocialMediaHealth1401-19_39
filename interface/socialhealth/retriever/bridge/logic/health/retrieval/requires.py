@@ -8,13 +8,14 @@ import json
 from sklearn.feature_extraction.text import TfidfVectorizer
 import pickle
 import pandas as pd
-import dill
 
 documents_length = 875
 
 normalizer = Normalizer()
-stop_words = [normalizer.normalize(x.strip()) for x in codecs.open('stopwords.txt', 'r', 'utf-8').readlines()]
-stopwords = [normalizer.normalize(x.strip()) for x in codecs.open('stopwords.txt', 'r', 'utf-8').readlines()]
+stop_words = [normalizer.normalize(x.strip()) for x in codecs.open(
+    'stopwords.txt', 'r', 'utf-8').readlines()]
+stopwords = [normalizer.normalize(x.strip()) for x in codecs.open(
+    'stopwords.txt', 'r', 'utf-8').readlines()]
 stemmer = Stemmer()
 lemmatizer = Lemmatizer()
 
@@ -37,8 +38,10 @@ f.close()
 # print(bioset[0])
 
 
-vectorizer = TfidfVectorizer(use_idf=True, norm='l2', ngram_range=(1, 2), analyzer='word')
-doc_term_mat = vectorizer.fit_transform([' '.join(doc) for doc in all_tokens_nonstop_lemstem])
+vectorizer = TfidfVectorizer(
+    use_idf=True, norm='l2', ngram_range=(1, 2), analyzer='word')
+doc_term_mat = vectorizer.fit_transform(
+    [' '.join(doc) for doc in all_tokens_nonstop_lemstem])
 vocabulary = vectorizer.get_feature_names_out()
 
 # MODEL_NAME = "SajjadAyoubi/distil-bigbird-fa-zwnj"
@@ -63,7 +66,4 @@ print(esr.retrieve(Query('نپش قلب')))
 """
 
 
-
-
 # print(df[0:10])
-
