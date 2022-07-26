@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,10 +14,20 @@
   </head>
   <body>
     {% include 'retriever/nav.html' %}
-
-    <form method="post">
-      <input type="submit" value="Link Analysis" name="link-analysis-button" />
-      {% csrf_token %}
-    </form>
+    <div class="container-fluid">
+      <div class="jumbotron" style="margin-top: 20px">
+        <form class="form-inline" method="post">
+          <div class="btn-pill col-auto mb-3">
+            <input
+              class="btn btn-primary"
+              type="submit"
+              value="Link Analysis"
+              name="link-analysis-button"
+            />
+          </div>
+          {% csrf_token %}
+        </form>
+      </div>
+    </div>
   </body>
 </html>

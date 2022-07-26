@@ -36,15 +36,21 @@ def search(query, k):
 
 
 def main(query):
+    print("training tfidf retrieval system for health")
+
     x = search(query, k=10)
     result = []
     for index in x:
-        temp = {'title': bioset[x]['title'], 'link': bioset[x]['link']}
+        # temp = {'title': bioset[index]['title'], 'link': bioset[index]['link']}
+        temp = '' + bioset[index]['title'] + '\n' + bioset[index]['link']
 
-        print(bioset[index]['title'])
-        print(bioset[index]['link'])
-        print()
+        # print(bioset[index]['title'])
+        # print(bioset[index]['link'])
+        # print()
         result.append(temp)
+
+    print("training tfidf retrieval system for health done")
+
     return result
 
 

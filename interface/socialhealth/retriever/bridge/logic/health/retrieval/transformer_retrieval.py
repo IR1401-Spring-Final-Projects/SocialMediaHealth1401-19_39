@@ -26,22 +26,29 @@ def search(query: str, k=12):
     return top_k[1][0]
 
 
-def main(input):
-    splitted_input = input.split(" ")
+def main(search):
+
+    print("training transformer retrieval system for health")
+
+    splitted_input = search.split(" ")
     nsi = []
     k = 12
     for x in splitted_input:
         if x not in stopwords:
             nsi.append(normalizer.normalize(lemmatizer.lemmatize(x)))
-    input = " ".join(nsi)
-    res = search(input, k)
+    search = " ".join(nsi)
+    res = search(search, k)
     answer = []
     for x in res:
-        temp = {'title': bioset[x]['title'], 'link': bioset[x]['link']}
+        # temp = {'title': bioset[x]['title'], 'link': bioset[x]['link']}
+        temp = '' + bioset[x]['title'] + '\n' + bioset[x]['link']
         print(bioset[x]['title'])
         print(bioset[x]['link'])
         print()
         answer.append(temp)
+
+    print("training transformer retrieval system for health done")
+
     return answer
 
 
