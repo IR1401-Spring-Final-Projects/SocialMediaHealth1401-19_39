@@ -101,9 +101,23 @@
               value="Classification/Clustering"
               name="classify-cluster-button"
             />
+            <input
+              class="btn btn-secondary"
+              type="submit"
+              value="Social Contents"
+              name="classify-cluster-button"
+              href="/retriever/classify/social"
+            />
+            <input
+              class="btn btn-secondary"
+              type="submit"
+              value="Health Contents"
+              name="classify-cluster-button"
+              href="/retriever/classify/health"
+            />
           </div>
           <p class="mb-3">Social</p>
-          <label class="switch mb-3 col-auto">
+          <label class="switch mb-3">
             <input
               type="checkbox"
               name="subject-toggle"
@@ -115,8 +129,6 @@
           <p class="mb-3">Health</p>
           {% csrf_token %}
         </form>
-        <a href="/retriever/classify/social">Social Contents</a>
-        <a href="/retriever/classify/health">Health Contents</a>
         <ul>
           <li>class: {{ class }}</li>
           <li>cluster: {{ cluster }}</li>
