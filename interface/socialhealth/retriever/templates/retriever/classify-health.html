@@ -33,10 +33,12 @@
             RSS is 759.411570228069
           </p>
           <img
+            {% load static %}
             src="{% static 'retrieval/health_clustering.png' %}"
             style="width: 30%; height: 30%"
           />
           <img
+            {% load static %}
             src="{% static 'retrieval/health_clustering2.png' %}"
             style="width: 30%; height: 30%"
           />
@@ -57,11 +59,6 @@
           </p>
           {% csrf_token %}
         </form>
-        <ul>
-          {% for d in data %}
-          <li>{{ d }}</li>
-          {% endfor %}
-        </ul>
       </div>
     </div>
   </body>
