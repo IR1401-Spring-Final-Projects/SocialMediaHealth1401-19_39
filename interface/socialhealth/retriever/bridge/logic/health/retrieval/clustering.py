@@ -1,3 +1,5 @@
+import itertools
+
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import numpy as np
@@ -8,18 +10,15 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import silhouette_score
 from yellowbrick.cluster import InterclusterDistance
 from yellowbrick.cluster import SilhouetteVisualizer
+from sklearn.decomposition import TruncatedSVD
 from .requires import *
+from scipy import sparse
 
 
-def cluster():
-    print("training cluster retrieval system for health")
-    true_labels = true_labels_func()
-
-    kmeans = KMeans(n_clusters=7, random_state=0).fit(doc_term_mat)
-    predicted_labels = kmeans.labels_
-
-    PCA_func(true_labels, predicted_labels)
-    TSNE_func(true_labels, predicted_labels)
+def cluster(search_term):
+    global kmeans, true_labels
+    # PCA_func(true_labels, predicted_labels)
+    # TSNE_func(true_labels, predicted_labels)
 
     RSS = calculate_RSS(doc_term_mat, kmeans.cluster_centers_, kmeans.labels_)
     # print("RSS is {}".format(RSS))
@@ -33,8 +32,9 @@ def cluster():
     score = purity_score(true_labels, predicted_labels)
     # print("purity score is {}".format(score))
 
-    print("training cluster retrieval system for health done")
+    y = query(search_term)
 
+    return RSS, silhouette_avg, score, y
 
 
 def true_labels_func():
@@ -99,11 +99,6 @@ def calculate_RSS(docs, centers, labels):
 
 def silhouette_visualizer(k=7):
     x = doc_term_mat.toarray()
-    # for i in range(2, 12):
-    #     model = KMeans(i, random_state=0)
-    #     visualizer = SilhouetteVisualizer(model)
-    #     visualizer.fit(x)
-    #     visualizer.show()
     model = KMeans(k, random_state=0)
     visualizer = SilhouetteVisualizer(model)
     visualizer.fit(x)
@@ -135,3 +130,47 @@ def purity_score(true_labels, predicted_labels):
     return accuracy_score(true_labels, arr)
 
 
+def process_query(query):
+    splitted_input = query.split(" ")
+    nsi = []
+    for x in splitted_input:
+        if x not in stopwords:
+            nsi.append([normalizer.normalize(lemmatizer.lemmatize(x))])
+    return nsi
+
+
+def find_query_vector(tokens):
+    vector = np.zeros(len(vocabulary))
+    for token in itertools.chain(*tokens):
+        try:
+            index = vectorizer.vocabulary_[token]
+            vector[index] = 1
+        except ValueError:
+            pass
+    return vector
+
+
+def query(search):
+    global kmeans, svd
+    query_vector = find_query_vector(process_query(search))
+    query_vector = sparse.csr_matrix(query_vector)
+
+    x_dr = svd.fit_transform(doc_term_mat)
+    y = kmeans.fit_predict(x_dr)
+
+    x_dr = svd.transform(query_vector)
+    y = kmeans.predict(x_dr)
+
+    return y[0]
+
+
+print("training cluster retrieval system for health")
+kmeans = KMeans(n_clusters=7, random_state=0).fit(doc_term_mat)
+predicted_labels = kmeans.labels_
+true_labels = true_labels_func()
+svd = TruncatedSVD(n_components=7, n_iter=7, random_state=42)
+print("training cluster retrieval system for health done")
+
+
+def run(search_term):
+    return cluster(search_term)
