@@ -10,7 +10,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Graph</title>
+    <title>Health Classify</title>
   </head>
   <body>
     {% include 'retriever/nav.html' %}
@@ -32,6 +32,14 @@
           <p class="fw-normal text-justify" style="text-indent: 3mm">
             RSS is 759.411570228069
           </p>
+          <img
+            src="{% static 'retrieval/health_clustering.png' %}"
+            style="width: 30%; height: 30%"
+          />
+          <img
+            src="{% static 'retrieval/health_clustering2.png' %}"
+            style="width: 30%; height: 30%"
+          />
           <p class="fs-1 text-justify text-danger" style="font-weight: bolder">
             Classification:
           </p>
@@ -47,7 +55,13 @@
           <p class="fw-normal text-justify" style="text-indent: 3mm">
             recall score: 0.7055670577409707
           </p>
+          {% csrf_token %}
         </form>
+        <ul>
+          {% for d in data %}
+          <li>{{ d }}</li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
   </body>
