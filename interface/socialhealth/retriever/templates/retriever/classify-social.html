@@ -33,6 +33,7 @@
             RSS is 988.3598210168306
           </p>
           <img
+            {% load static %}
             src="{% static 'retrieval/social_clustering.png' %}"
             style="width: 30%; height: 30%"
           />
@@ -53,11 +54,6 @@
           </p>
           {% csrf_token %}
         </form>
-        <ul>
-          {% for d in data %}
-          <li>{{ d }}</li>
-          {% endfor %}
-        </ul>
       </div>
     </div>
   </body>
