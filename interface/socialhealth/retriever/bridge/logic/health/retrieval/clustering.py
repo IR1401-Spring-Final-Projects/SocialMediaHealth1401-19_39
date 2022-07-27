@@ -15,28 +15,6 @@ from .requires import *
 from scipy import sparse
 
 
-def cluster(search_term):
-    global kmeans, true_labels
-    # PCA_func(true_labels, predicted_labels)
-    # TSNE_func(true_labels, predicted_labels)
-
-    RSS = calculate_RSS(doc_term_mat, kmeans.cluster_centers_, kmeans.labels_)
-    # print("RSS is {}".format(RSS))
-
-    silhouette_avg = silhouette_score(doc_term_mat, kmeans.labels_)
-    # print("For n_clusters =", 7, "The average silhouette_score is :", silhouette_avg, )
-
-    silhouette_visualizer(7)
-    intercluster_distance_maps(7)
-
-    score = purity_score(true_labels, predicted_labels)
-    # print("purity score is {}".format(score))
-
-    y = query(search_term)
-
-    return RSS, silhouette_avg, score, y
-
-
 def true_labels_func():
     categories = set()
     for i in bioset:
@@ -54,17 +32,20 @@ def true_labels_func():
 
 
 def TSNE_func(true_labels, predicted_labels):
-    X_embedded = TSNE(n_components=2, learning_rate='auto', init='random').fit_transform(doc_term_mat.toarray())
+    X_embedded = TSNE(n_components=2, learning_rate='auto',
+                      init='random').fit_transform(doc_term_mat.toarray())
 
     # plot 1:
     plt.subplot(1, 2, 1)
-    plt.scatter(X_embedded[:, 0], X_embedded[:, 1], c=true_labels, s=50, cmap='viridis')
+    plt.scatter(X_embedded[:, 0], X_embedded[:, 1],
+                c=true_labels, s=50, cmap='viridis')
     plt.title("True")
     plt.rcParams["figure.figsize"] = (15, 6)
 
     # plot 2:
     plt.subplot(1, 2, 2)
-    plt.scatter(X_embedded[:, 0], X_embedded[:, 1], c=predicted_labels, s=50, cmap='viridis')
+    plt.scatter(X_embedded[:, 0], X_embedded[:, 1],
+                c=predicted_labels, s=50, cmap='viridis')
     plt.title("Predicted")
     plt.rcParams["figure.figsize"] = (15, 6)
 
@@ -76,13 +57,15 @@ def PCA_func(true_labels, predicted_labels):
     principalComponents = pca.fit_transform(doc_term_mat.toarray())
 
     plt.subplot(1, 2, 1)
-    plt.scatter(principalComponents[:, 0], principalComponents[:, 1], c=true_labels, s=50, cmap='viridis')
+    plt.scatter(principalComponents[:, 0], principalComponents[:,
+                1], c=true_labels, s=50, cmap='viridis')
     plt.title("True")
     plt.rcParams["figure.figsize"] = (30, 6)
 
     # plot 2:
     plt.subplot(1, 2, 2)
-    plt.scatter(principalComponents[:, 0], principalComponents[:, 1], c=predicted_labels, s=50, cmap='viridis')
+    plt.scatter(principalComponents[:, 0], principalComponents[:,
+                1], c=predicted_labels, s=50, cmap='viridis')
     plt.title("Predicted")
     plt.rcParams["figure.figsize"] = (30, 6)
 
@@ -124,7 +107,8 @@ def purity_score(true_labels, predicted_labels):
     bins = np.concatenate((labels, [np.max(labels) + 1]), axis=0)
 
     for cluster in np.unique(predicted_labels):
-        winner = np.argmax(np.histogram(true_labels[predicted_labels == cluster], bins=bins)[0])
+        winner = np.argmax(np.histogram(
+            true_labels[predicted_labels == cluster], bins=bins)[0])
         arr[predicted_labels == cluster] = winner
 
     return accuracy_score(true_labels, arr)
