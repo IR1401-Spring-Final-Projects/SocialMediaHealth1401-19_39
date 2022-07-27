@@ -30,8 +30,8 @@ def query_expansion(query):
         except:
             pass
         values = list(list_of_synonyms.values())
-        values = values[0]
         try:
+            values = values[0]
             expand += f'{values[0]} '
         except:
             expand += ''
