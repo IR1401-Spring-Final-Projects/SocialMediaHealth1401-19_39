@@ -14,17 +14,11 @@ from sklearn.decomposition import TruncatedSVD
 from .requires import *
 from scipy import sparse
 
-print("training cluster retrieval system for health")
-kmeans = KMeans(n_clusters=7, random_state=0).fit(doc_term_mat)
-predicted_labels = kmeans.labels_
-print("training cluster retrieval system for health done")
 
-
-def cluster():
-    true_labels = true_labels_func()
-
-    PCA_func(true_labels, predicted_labels)
-    TSNE_func(true_labels, predicted_labels)
+def cluster(search_term):
+    global kmeans, true_labels
+    # PCA_func(true_labels, predicted_labels)
+    # TSNE_func(true_labels, predicted_labels)
 
     RSS = calculate_RSS(doc_term_mat, kmeans.cluster_centers_, kmeans.labels_)
     # print("RSS is {}".format(RSS))
@@ -38,7 +32,7 @@ def cluster():
     score = purity_score(true_labels, predicted_labels)
     # print("purity score is {}".format(score))
 
-    y = query(kmeans)
+    y = query(search_term)
 
     return RSS, silhouette_avg, score, y
 
@@ -105,11 +99,6 @@ def calculate_RSS(docs, centers, labels):
 
 def silhouette_visualizer(k=7):
     x = doc_term_mat.toarray()
-    # for i in range(2, 12):
-    #     model = KMeans(i, random_state=0)
-    #     visualizer = SilhouetteVisualizer(model)
-    #     visualizer.fit(x)
-    #     visualizer.show()
     model = KMeans(k, random_state=0)
     visualizer = SilhouetteVisualizer(model)
     visualizer.fit(x)
@@ -161,11 +150,10 @@ def find_query_vector(tokens):
     return vector
 
 
-def query(kmeans, search):
+def query(search):
+    global kmeans, svd
     query_vector = find_query_vector(process_query(search))
     query_vector = sparse.csr_matrix(query_vector)
-
-    svd = TruncatedSVD(n_components=7, n_iter=7, random_state=42)
 
     x_dr = svd.fit_transform(doc_term_mat)
     y = kmeans.fit_predict(x_dr)
@@ -174,3 +162,15 @@ def query(kmeans, search):
     y = kmeans.predict(x_dr)
 
     return y[0]
+
+
+print("training cluster retrieval system for health")
+kmeans = KMeans(n_clusters=7, random_state=0).fit(doc_term_mat)
+predicted_labels = kmeans.labels_
+true_labels = true_labels_func()
+svd = TruncatedSVD(n_components=7, n_iter=7, random_state=42)
+print("training cluster retrieval system for health done")
+
+
+def run(search_term):
+    return cluster(search_term)

@@ -58,7 +58,7 @@ def find_query_vector(tokens):
     return vector
 
 
-def regression_model(true_laکbels, query):
+def regression_model(query):
     TEST_SIZE = 0.2
     X_train, X_test, y_train, y_test = sk.model_selection.train_test_split(doc_term_mat, true_labels,
                                                                            test_size=TEST_SIZE)
@@ -86,5 +86,5 @@ classification()
 print("training classification retrieval system for health done")
 
 
-def retrieve(search_term):
-    return regression_model(true_labels, search_term)
+def run(search_term):
+    return regression_model(search_term)
