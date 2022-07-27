@@ -104,3 +104,18 @@ def link_analysis_health(request):
         if nav:
             return nav
     return render(request, 'retriever/link-analysis-health.html')
+
+def classify_health(request):
+    if request.method == 'POST':
+        nav = navbar(request)
+        if nav:
+            return nav
+    return render(request, 'retriever/classify-health.html')
+
+    
+def classify_social(request):
+    if request.method == 'POST':
+        nav = navbar(request)
+        if nav:
+            return nav
+    return render(request, 'retriever/classify-social.html')

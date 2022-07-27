@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pr" ang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Graph</title>
+  </head>
+  <body>
+    {% include 'retriever/nav.html' %}
+    <div class="container-fluid">
+      <div class="jumbotron" style="margin-top: 20px">
+        <form class="" method="post">
+          <p class="fs-1 text-justify text-danger" style="font-weight: bolder">
+            Clustering:
+          </p>
+          <p class="fw-normal text-justify" style="text-indent: 3mm">
+            purity score: 0.496
+          </p>
+          <p class="fw-normal text-justify" style="text-indent: 3mm">
+            For 7 clusters the Silhouette Coefficient is 0.0317304549395302
+          </p>
+          <p class="fw-normal text-justify" style="text-indent: 3mm">
+            For 7 clusters the average silhouette_score is : 0.03286448233912535
+          </p>
+          <p class="fw-normal text-justify" style="text-indent: 3mm">
+            RSS is 759.411570228069
+          </p>
+          <p class="fs-1 text-justify text-danger" style="font-weight: bolder">
+            Classification:
+          </p>
+          <p class="fw-normal text-justify" style="text-indent: 3mm">
+            accuracy score: 0.6971428571428572
+          </p>
+          <p class="fw-normal text-justify" style="text-indent: 3mm">
+            f1 score: 0.7031460455380721
+          </p>
+          <p class="fw-normal text-justify" style="text-indent: 3mm">
+            precision score: 0.7086140077640569
+          </p>
+          <p class="fw-normal text-justify" style="text-indent: 3mm">
+            recall score: 0.7055670577409707
+          </p>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
