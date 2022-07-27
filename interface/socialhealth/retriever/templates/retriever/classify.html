@@ -115,12 +115,11 @@
           <p class="mb-3">Health</p>
           {% csrf_token %}
         </form>
+        <a href="/retriever/classify/social">Social Contents</a>
+        <a href="/retriever/classify/health">Health Contents</a>
         <ul>
-          <li>
-            class: {{ class }}
-          </li>
-          <li>
-            cluster: {{ cluster }}
+          <li>class: {{ class }}</li>
+          <li>cluster: {{ cluster }}</li>
         </ul>
       </div>
     </div>
