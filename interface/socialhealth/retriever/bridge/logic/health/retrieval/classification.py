@@ -59,20 +59,18 @@ def find_query_vector(tokens):
 
 
 def regression_model(query):
-    TEST_SIZE = 0.2
-    X_train, X_test, y_train, y_test = sk.model_selection.train_test_split(doc_term_mat, true_labels,
-                                                                           test_size=TEST_SIZE)
-    logistic_regression = sk.linear_model.LogisticRegression()
-    logistic_regression.fit(X_train, y_train)
-
-    y_pred = logistic_regression.predict(X_test)
-
-    print("logistic regression score", logistic_regression.score(X_test, y_test))
-    print("confusion matrix: \n", confusion_matrix(y_test, y_pred))
-    print("accuracy score: ", accuracy_score(y_test, y_pred))
-    print("f1 score: ", f1_score(y_test, y_pred, average="macro"))
-    print("precision score: ", precision_score(y_test, y_pred, average="macro"))
-    print("recall score: ", recall_score(y_test, y_pred, average="macro"))
+    global logistic_regression
+    # TEST_SIZE = 0.2
+    # X_train, X_test, y_train, y_test = sk.model_selection.train_test_split(doc_term_mat, true_labels,
+    #                                                                        test_size=TEST_SIZE)
+    # logistic_regression = sk.linear_model.LogisticRegression()
+    # logistic_regression.fit(X_train, y_train)
+    # print("logistic regression score", logistic_regression.score(X_test, y_test))
+    # print("confusion matrix: \n", confusion_matrix(y_test, y_pred))
+    # print("accuracy score: ", accuracy_score(y_test, y_pred))
+    # print("f1 score: ", f1_score(y_test, y_pred, average="macro"))
+    # print("precision score: ", precision_score(y_test, y_pred, average="macro"))
+    # print("recall score: ", recall_score(y_test, y_pred, average="macro"))
 
     query_vector = find_query_vector(process_query(query))
     query_vector = sparse.csr_matrix(query_vector)
@@ -83,6 +81,11 @@ def regression_model(query):
 
 print("training classification retrieval system for health")
 classification()
+TEST_SIZE = 0.2
+X_train, X_test, y_train, y_test = sk.model_selection.train_test_split(doc_term_mat, true_labels,
+                                                                       test_size=TEST_SIZE)
+logistic_regression = sk.linear_model.LogisticRegression()
+logistic_regression.fit(X_train, y_train)
 print("training classification retrieval system for health done")
 
 
